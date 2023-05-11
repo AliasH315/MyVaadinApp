@@ -3,6 +3,7 @@ package org.iismagilov.views;
         import com.vaadin.flow.component.Component;
         import com.vaadin.flow.component.Key;
         import com.vaadin.flow.component.button.*;
+        import com.vaadin.flow.component.button.Button;
         import com.vaadin.flow.component.dependency.JsModule;
         import com.vaadin.flow.component.html.H1;
         import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -13,6 +14,8 @@ package org.iismagilov.views;
         import com.vaadin.flow.component.dependency.CssImport;
         import com.vaadin.flow.component.applayout.*;
         import com.vaadin.flow.component.tabs.*;
+
+        import java.awt.*;
 
 @Route("")
 @CssImport("./styles/views/main/main-view.css")
@@ -33,22 +36,19 @@ public class MainView extends VerticalLayout  {
         buttonClientMenu.addClickShortcut(Key.ENTER);
 
         buttonAccountMenu.addClickListener(click -> {
-            AccountMenuView accountMenuView = new AccountMenuView();
+            getUI().ifPresent(ui ->
+                    ui.navigate("/accountMenu"));
         });
         buttonAccountMenu.addClickShortcut(Key.ENTER);
 
         buttonReturnMainMenu.addClickListener(click -> {
             Dialog dialog = new Dialog();
             dialog.setHeaderTitle("Вы точно хотите выйти?");
-            HorizontalLayout dialogLayout = new HorizontalLayout();
             Button yesButton = new Button("Да", (e) -> dialog.close());
             Button cancelButton = new Button("Нет", (e) -> dialog.close());
-            add(dialogLayout,yesButton,cancelButton);
+            dialog.getFooter().add(yesButton,cancelButton);
+            dialog.open();
 
-            //yesButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-            //cancelButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-            //dialog.getFooter().add(yesButton);
-            //dialog.getFooter().add(cancelButton);
             //yesButton.addClickShortcut(Key.ENTER);
             //cancelButton.addClickShortcut(Key.ENTER);
             //dialog.open();
@@ -58,9 +58,9 @@ public class MainView extends VerticalLayout  {
                 mainLayout,
                 new H1("Меню банка:"),
                 mainLayout,
-                        buttonClientMenu,
-                        buttonAccountMenu,
-                        buttonReturnMainMenu
+                    buttonClientMenu,
+                    buttonAccountMenu,
+                    buttonReturnMainMenu
         );
     }
 }

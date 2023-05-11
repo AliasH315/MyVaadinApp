@@ -2,7 +2,9 @@ package org.iismagilov.views;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -12,26 +14,27 @@ import com.vaadin.flow.router.Route;
 public class ClientMenuView extends VerticalLayout {
 
     public ClientMenuView() {
-        VerticalLayout todosList = new VerticalLayout();
-        TextField taskField = new TextField();
-        Button addButton = new Button("Add2");
-        addButton.addClickListener(click -> {
-            Checkbox checkbox = new Checkbox(taskField.getValue());
-            todosList.add(checkbox);
-            todosList.add(checkbox);
-        });
-        addButton.addClickShortcut(Key.ENTER);
+        VerticalLayout clientLayout = new VerticalLayout();
+        Button buttonClientAdd = new Button("Создать клиента");
+        buttonClientAdd.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        Button buttonClientUpdate = new Button("Редактировать клиента");
+        buttonClientUpdate.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        Button buttonClientDelete = new Button("Удалить клиента");
+        buttonClientDelete.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        Button buttonReturn = new Button("Вернуться назад");
+        buttonReturn.addThemeVariants(ButtonVariant.LUMO_LARGE);
 
+        buttonReturn.addClickListener(click -> {
+            getUI().ifPresent(ui ->
+                    ui.navigate(""));
+        });
         add(
-                new H1("Ismagilov App"),
-                todosList,
-                new H1("Банковское приложение приветствует вас!"),
-                todosList,
-                todosList,
-                new HorizontalLayout(
-                        taskField,
-                        addButton
-                )
+                new H1("Меню клиента:"),
+                clientLayout,
+                    buttonClientAdd,
+                    buttonClientUpdate,
+                    buttonClientDelete,
+                    buttonReturn
         );
     }
 }
