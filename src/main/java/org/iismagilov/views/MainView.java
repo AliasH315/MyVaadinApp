@@ -19,23 +19,23 @@ package org.iismagilov.views;
 public class MainView extends VerticalLayout  {
     public MainView() {
         VerticalLayout mainLayout = new VerticalLayout();
-        Button buttonMenuClient = new Button("Работа с клиентами");
-        buttonMenuClient.addThemeVariants(ButtonVariant.LUMO_LARGE);
-        Button buttonMenuAccount = new Button("Работа со счетами");
-        buttonMenuAccount.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        Button buttonClientMenu = new Button("Работа с клиентами");
+        buttonClientMenu.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        Button buttonAccountMenu = new Button("Работа со счетами");
+        buttonAccountMenu.addThemeVariants(ButtonVariant.LUMO_LARGE);
         Button buttonReturnMainMenu = new Button("Выход из программы");
         buttonReturnMainMenu.addThemeVariants(ButtonVariant.LUMO_LARGE);
 
-        buttonMenuClient.addClickListener(click -> {
-            //getUI().getPage().setLocation("/clientMenu");
-            ClientMenuView clientMenuView = new ClientMenuView();
+        buttonClientMenu.addClickListener(click -> {
+            getUI().ifPresent(ui ->
+                    ui.navigate("/clientMenu"));
         });
-        buttonMenuClient.addClickShortcut(Key.ENTER);
+        buttonClientMenu.addClickShortcut(Key.ENTER);
 
-        buttonMenuAccount.addClickListener(click -> {
+        buttonAccountMenu.addClickListener(click -> {
             AccountMenuView accountMenuView = new AccountMenuView();
         });
-        buttonMenuAccount.addClickShortcut(Key.ENTER);
+        buttonAccountMenu.addClickShortcut(Key.ENTER);
 
         buttonReturnMainMenu.addClickListener(click -> {
             Dialog dialog = new Dialog();
@@ -58,8 +58,8 @@ public class MainView extends VerticalLayout  {
                 mainLayout,
                 new H1("Меню банка:"),
                 mainLayout,
-                        buttonMenuClient,
-                        buttonMenuAccount,
+                        buttonClientMenu,
+                        buttonAccountMenu,
                         buttonReturnMainMenu
         );
     }
