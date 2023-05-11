@@ -9,8 +9,10 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-@Route(value = "clientMenu")
+@Route(value="clientMenu", layout = MainLayout.class)
+@PageTitle("Работа с клиентами | Vaadin App by Ilyas")
 public class ClientMenuView extends VerticalLayout {
 
     public ClientMenuView() {
@@ -29,7 +31,7 @@ public class ClientMenuView extends VerticalLayout {
                     ui.navigate(""));
         });
         add(
-                new H1("Меню клиента:"),
+                new H1("Операции с клиентами:"),
                 clientLayout,
                     buttonClientAdd,
                     buttonClientUpdate,

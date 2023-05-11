@@ -1,25 +1,16 @@
 package org.iismagilov.views;
 
-        import com.vaadin.flow.component.Component;
         import com.vaadin.flow.component.Key;
         import com.vaadin.flow.component.button.*;
         import com.vaadin.flow.component.button.Button;
-        import com.vaadin.flow.component.dependency.JsModule;
         import com.vaadin.flow.component.html.H1;
-        import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
         import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-        import com.vaadin.flow.component.textfield.TextField;
         import com.vaadin.flow.component.dialog.Dialog;
         import com.vaadin.flow.router.Route;
-        import com.vaadin.flow.component.dependency.CssImport;
-        import com.vaadin.flow.component.applayout.*;
-        import com.vaadin.flow.component.tabs.*;
 
-        import java.awt.*;
-
-@Route("")
-@CssImport("./styles/views/main/main-view.css")
-public class MainView extends VerticalLayout  {
+@Route(value="", layout = MainLayout.class)
+//@CssImport("./styles/views/main/main-view.css")
+public class MainView extends VerticalLayout {
     public MainView() {
         VerticalLayout mainLayout = new VerticalLayout();
         Button buttonClientMenu = new Button("Работа с клиентами");
@@ -54,9 +45,7 @@ public class MainView extends VerticalLayout  {
             //dialog.open();
         });
         add(
-                new H1("Ismagilov App"),
-                mainLayout,
-                new H1("Меню банка:"),
+                new H1("Основное меню:"),
                 mainLayout,
                     buttonClientMenu,
                     buttonAccountMenu,

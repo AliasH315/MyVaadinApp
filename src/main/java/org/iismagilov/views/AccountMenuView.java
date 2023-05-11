@@ -1,16 +1,14 @@
 package org.iismagilov.views;
 
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.orderedlayout.*;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "accountMenu")
+@Route(value="accountMenu", layout = MainLayout.class)
+@PageTitle("Работа со счетами | Vaadin App by Ilyas")
 public class AccountMenuView extends VerticalLayout {
     public AccountMenuView() {
         VerticalLayout accountLayout = new VerticalLayout();
@@ -32,7 +30,7 @@ public class AccountMenuView extends VerticalLayout {
                     ui.navigate(""));
         });
         add(
-                new H1("Меню счета:"),
+                new H1("Операции со счетами:"),
                 accountLayout,
                     buttonOpenAccount,
                     buttonUpdateAccount,
