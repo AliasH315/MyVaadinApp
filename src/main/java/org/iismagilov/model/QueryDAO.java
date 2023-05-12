@@ -36,7 +36,7 @@ public class QueryDAO {
 
     public static void selectAllClient() {
         try {
-            String sql = "SELECT * FROM CLIENT";
+            String sql = "SELECT id,surName,firstName,LastName FROM CLIENT";
             PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
             stmt.executeUpdate();
             System.out.println("Query selectAllClient is complete!");

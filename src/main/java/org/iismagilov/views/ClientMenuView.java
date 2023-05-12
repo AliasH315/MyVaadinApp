@@ -1,23 +1,16 @@
 package org.iismagilov.views;
 
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.iismagilov.model.ConnectionDAO;
 import org.iismagilov.model.QueryDAO;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 @Route(value="clientMenu", layout = MainLayout.class)
 @PageTitle("Работа с клиентами | Vaadin App by Ilyas")
@@ -42,16 +35,10 @@ public class ClientMenuView extends VerticalLayout {
                 buttonReturn
         );
 
-        /*
-        TextField tf2 = new TextField("Street address");
-        tf2.setIcon(VaadinIcons.ROAD);
-        form.addComponent(tf2);
-     */
         buttonClientAdd.addClickListener(click -> {
             FormLayout formLayout = new FormLayout();
             formLayout.setHeight("500px");
             formLayout.setWidth("900px");
-            System.out.println("buttonClientAdd formLayout is start!");
             TextField fieldFirstName = new TextField("Имя клиента:");
             fieldFirstName.setRequiredIndicatorVisible(true);
             formLayout.add(fieldFirstName);
@@ -74,9 +61,31 @@ public class ClientMenuView extends VerticalLayout {
             fieldAddress.setWidth("300px");
             formLayout.add(fieldAddress);
             Button saveButton = new Button("Сохранить", (Save) -> {
-                //QueryDAO.insertClient((String) fieldFirstName,fieldSurName,fieldLastName,fieldPhone,fieldInn,fieldAddress);;
+                QueryDAO.insertClient(
+                        fieldFirstName.getValue().toString(),
+                        fieldSurName.getValue().toString(),
+                        fieldLastName.getValue().toString(),
+                        fieldPhone.getValue().toString(),
+                        fieldInn.getValue().toString(),
+                        fieldAddress.getValue().toString()
+                );
+                Notification notification = Notification.show("Успешное добавление клиента!");
+                fieldFirstName.clear();
+                fieldSurName.clear();
+                fieldLastName.clear();
+                fieldPhone.clear();
+                fieldInn.clear();
+                fieldAddress.clear();
+
             });
-            Button cancelButton = new Button("Выход");
+            Button cancelButton = new Button("Выход", (Exit) -> {
+                fieldFirstName.clear();
+                fieldSurName.clear();
+                fieldLastName.clear();
+                fieldPhone.clear();
+                fieldInn.clear();
+                fieldAddress.clear();
+            });
             formLayout.add(new HorizontalLayout(saveButton,cancelButton));
             add(
                     formLayout
@@ -87,12 +96,12 @@ public class ClientMenuView extends VerticalLayout {
 
 
         });
-
+        // Не реализовано
         buttonClientUpdate.addClickListener(click -> {
             QueryDAO.updateClient(3,"wer2","dfg2","sdfsd2f","9172434364","343453453","Nfegfg");
 
         });
-
+        // Не реализовано
         buttonClientDelete.addClickListener(click -> {
             QueryDAO.deleteClient(3);
         });
@@ -101,6 +110,5 @@ public class ClientMenuView extends VerticalLayout {
             getUI().ifPresent(ui ->
                     ui.navigate(""));
         });
-
-    }
+        }
 }
