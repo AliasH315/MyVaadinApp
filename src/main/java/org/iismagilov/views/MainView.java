@@ -35,8 +35,8 @@ public class MainView extends VerticalLayout {
         buttonReturnMainMenu.addClickListener(click -> {
             Dialog dialog = new Dialog();
             dialog.setHeaderTitle("Вы точно хотите выйти?");
-            Button yesButton = new Button("Да", (e) -> dialog.close());
-            Button cancelButton = new Button("Нет", (e) -> dialog.close());
+            Button yesButton = new Button("Да", (Yes) -> dialog.close());
+            Button cancelButton = new Button("Нет", (No) -> dialog.close());
             dialog.getFooter().add(yesButton,cancelButton);
             dialog.open();
 
