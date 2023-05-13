@@ -12,6 +12,7 @@ import com.vaadin.flow.router.Route;
 public class AccountMenuView extends VerticalLayout {
     public AccountMenuView() {
         VerticalLayout accountLayout = new VerticalLayout();
+        //VerticalLayout accountLayout = new VerticalLayout();
         Button buttonOpenAccount = new Button("Открыть счет клиенту");
         buttonOpenAccount.addThemeVariants(ButtonVariant.LUMO_LARGE);
         Button buttonUpdateAccount = new Button("Редактировать счет клиента");
