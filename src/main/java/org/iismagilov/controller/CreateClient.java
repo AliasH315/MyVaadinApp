@@ -143,11 +143,11 @@ public class CreateClient extends VerticalLayout {
     }
 
     private Button exit(){
-        Button cancelButton = new Button("Отменить",(Exit) -> {
+        Button localCancelButton = new Button("Отменить",(Exit) -> {
             getUI().ifPresent(ui ->
                     ui.navigate("clientMenu"));
         });
-        return cancelButton;
+        return localCancelButton;
     }
 
     private void notification(String text){
