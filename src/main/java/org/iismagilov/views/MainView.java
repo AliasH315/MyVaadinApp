@@ -8,9 +8,11 @@ package org.iismagilov.views;
         import com.vaadin.flow.component.notification.Notification;
         import com.vaadin.flow.component.orderedlayout.VerticalLayout;
         import com.vaadin.flow.component.dialog.Dialog;
+        import com.vaadin.flow.router.PageTitle;
         import com.vaadin.flow.router.Route;
 
 @Route(value="", layout = MainLayout.class)
+@PageTitle("Главное меню | Vaadin App by Ilyas")
 //@CssImport("./styles/views/main/main-view.css")
 public class MainView extends VerticalLayout {
     public MainView() {

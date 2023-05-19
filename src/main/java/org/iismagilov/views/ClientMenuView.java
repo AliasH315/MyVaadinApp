@@ -3,10 +3,14 @@ package org.iismagilov.views;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.iismagilov.controller.CreateClient;
+import org.iismagilov.controller.DeleteClient;
 import org.iismagilov.model.QueryDAO;
 
 @Route(value="clientMenu", layout = MainLayout.class)
@@ -21,6 +25,8 @@ public class ClientMenuView extends VerticalLayout {
         VerticalLayout clientLayout = new VerticalLayout();
         Button buttonClientAdd = new Button("Создать клиента");
         buttonClientAdd.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        Button buttonClientLook = new Button("Просмотреть клиента");
+        buttonClientLook.addThemeVariants(ButtonVariant.LUMO_LARGE);
         Button buttonClientUpdate = new Button("Редактировать клиента");
         buttonClientUpdate.addThemeVariants(ButtonVariant.LUMO_LARGE);
         Button buttonClientDelete = new Button("Удалить клиента");
@@ -31,19 +37,15 @@ public class ClientMenuView extends VerticalLayout {
                 new H1("Операции с клиентами:"),
                 clientLayout,
                 buttonClientAdd,
+                buttonClientLook,
                 buttonClientUpdate,
                 buttonClientDelete,
                 buttonReturn
         );
 
         buttonClientAdd.addClickListener(click -> {
-            ClientAddView clientAddView = new ClientAddView();
-            add(
-                    clientAddView.createClient()
-            );
-
-            System.out.println("buttonClientAdd formLayout is complete!");
-
+            getUI().ifPresent(ui ->
+                    ui.navigate("createClient"));
         });
         // Не реализовано
         buttonClientUpdate.addClickListener(click -> {
@@ -52,7 +54,8 @@ public class ClientMenuView extends VerticalLayout {
         });
         // Не реализовано
         buttonClientDelete.addClickListener(click -> {
-            QueryDAO.deleteClient(3);
+            DeleteClient deleteClient = new DeleteClient();
+            deleteClient.deleteClient();
         });
 
         buttonReturn.addClickListener(click -> {

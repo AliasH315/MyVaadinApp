@@ -3,8 +3,12 @@ package org.iismagilov.controller;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Client {
 
+    HashSet<Client> clients;
     private Integer id;
     private String firstName;
     private String surName;
@@ -13,6 +17,11 @@ public class Client {
     private String inn;
     private String address;
 
+    public Client() {
+    }
+    public Client(Integer id) {
+        this.id = id;
+    }
     public Client(Integer id, String firstName, String surName, String lastName, String phoneNumber, String inn, String address) {
         this.id = id;
         this.firstName = firstName;
@@ -23,8 +32,6 @@ public class Client {
         this.address = address;
     }
 
-    public Client() {
-    }
     public Integer getId() {
         return id;
     }
@@ -57,19 +64,9 @@ public class Client {
         this.lastName = lastName;
     }
 
-    TextField nameField = new TextField();
-
-    Binder<Client> binder = new Binder<>();
-
-    // Bind nameField to the Person.name property
-    // by specifying its getter and setter
-    //binder.bind(firstName, Client::getFirstName, Client::setFirstName);
-
-    // Bind an actual concrete Person instance.
-    // After this, whenever the user changes the value
-    // of nameField, p.setName is automatically called.
-        //Client client = new Client();
-        //binder.setBean(client);
-
-
+    @Override
+    public String toString() {
+        return "Client: id = " + getId()
+                + " Full name: "+ getSurName() + getFirstName() + getLastName();
+    }
 }
