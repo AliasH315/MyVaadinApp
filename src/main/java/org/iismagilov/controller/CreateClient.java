@@ -121,12 +121,12 @@ public class CreateClient extends VerticalLayout {
                 notification("ВНИМАНИЕ! Необходимо заполнить место жительства!");
             } else {
                 QueryDAO.insertClient(
-                        fieldFirstName.getValue().toString(),
-                        fieldSurName.getValue().toString(),
-                        fieldLastName.getValue().toString(),
-                        fieldPhone.getValue().toString(),
-                        fieldInn.getValue().toString(),
-                        fieldAddress.getValue().toString()
+                        fieldFirstName.getValue(),
+                        fieldSurName.getValue(),
+                        fieldLastName.getValue(),
+                        fieldPhone.getValue(),
+                        fieldInn.getValue(),
+                        fieldAddress.getValue()
                 );
                 notification("Успешное добавление клиента!");
                 getUI().ifPresent(ui ->
