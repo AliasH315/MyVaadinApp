@@ -30,7 +30,7 @@ public class CreateClient extends VerticalLayout {
     TextField fieldPhone;
     TextField fieldInn;
     TextField fieldAddress;
-    private Component createClient() {
+    private void createClient() {
         formLayout = new VerticalLayout();
         H1 text = new H1("Окно создания клиента:");
         //text.getStyle().set("text-align", "center");
@@ -40,7 +40,6 @@ public class CreateClient extends VerticalLayout {
         );
 
         System.out.println("Method createClient() is complete");
-        return formLayout;
     }
     private Component createFIOForm(){
         VerticalLayout layoutFIO = new VerticalLayout();
@@ -72,7 +71,7 @@ public class CreateClient extends VerticalLayout {
         return layoutFIO;
     }
 
-    private Component createPhoneForm(){
+    private void createPhoneForm(){
         VerticalLayout layoutPhone = new VerticalLayout();
         fieldPhone = new TextField("Номер телефона:");
         fieldPhone.setWidth("300px");
@@ -91,9 +90,9 @@ public class CreateClient extends VerticalLayout {
         );
         add(layoutPhone);
         System.out.println("Method createPhoneForm() is complete");
-        return layoutPhone;
     }
-    private Component createInnForm() {
+
+    private void createInnForm() {
         VerticalLayout layoutInn = new VerticalLayout();
         fieldInn = new TextField("ИНН:");
         fieldInn.setWidth("300px");
@@ -112,7 +111,6 @@ public class CreateClient extends VerticalLayout {
         );
         add(layoutInn);
         System.out.println("Method createInnForm() is complete");
-        return layoutInn;
     }
     private void createAddressForm() {
         VerticalLayout layoutAddress = new VerticalLayout();
