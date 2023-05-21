@@ -4,7 +4,6 @@ import org.iismagilov.controller.Client;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 public class QueryDAO {
 
@@ -29,8 +28,8 @@ public class QueryDAO {
             System.err.println(ex);
         }
     }
-    public static Boolean deleteClient(Integer id) {
-        Boolean deleteSuccessful = true;
+    public static boolean deleteClient(Integer id) {
+        boolean deleteSuccessful = true;
             try {
                 String sql = "DELETE FROM "+ clientsTable +" WHERE id = ?";
                 PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
