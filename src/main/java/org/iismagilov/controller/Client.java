@@ -3,12 +3,13 @@ package org.iismagilov.controller;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Client {
 
-    HashSet<Client> clients;
+    //public ArrayList<Client> clients;
     private Integer id;
     private String firstName;
     private String surName;
@@ -35,7 +36,6 @@ public class Client {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -43,7 +43,6 @@ public class Client {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -51,7 +50,6 @@ public class Client {
     public String getSurName() {
         return surName;
     }
-
     public void setSurName(String surName) {
         this.surName = surName;
     }
@@ -59,14 +57,33 @@ public class Client {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public String getPhoneNumber() {return phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getInn() {return inn;}
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getAddress() {return address;}
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+
     @Override
     public String toString() {
         return "Client: id = " + getId()
-                + " Full name: "+ getSurName() + getFirstName() + getLastName();
+                + ", Full name: "+ getSurName() + " " + getFirstName() + " " + getLastName()
+                + ", Phone: "+getPhoneNumber()
+                +", INN: "+getInn()
+                +", Address: "+getAddress();
     }
 }

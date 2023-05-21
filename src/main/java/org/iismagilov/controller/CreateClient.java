@@ -20,7 +20,7 @@ public class CreateClient extends VerticalLayout {
 
     public CreateClient(){
         System.out.println("Class createClient is start");
-        createClient();
+        initCreateClient();
     }
 
     VerticalLayout formLayout;
@@ -30,7 +30,7 @@ public class CreateClient extends VerticalLayout {
     TextField fieldPhone;
     TextField fieldInn;
     TextField fieldAddress;
-    private void createClient() {
+    private void initCreateClient() {
         formLayout = new VerticalLayout();
         H1 text = new H1("Окно создания клиента:");
         //text.getStyle().set("text-align", "center");

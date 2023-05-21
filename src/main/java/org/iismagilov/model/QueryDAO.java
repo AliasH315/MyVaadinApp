@@ -3,6 +3,7 @@ package org.iismagilov.model;
 import org.iismagilov.controller.Client;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class QueryDAO {
@@ -28,7 +29,8 @@ public class QueryDAO {
             System.err.println(ex);
         }
     }
-    public static void deleteClient(Integer id) {
+    public static Boolean deleteClient(Integer id) {
+        Boolean deleteSuccessful = true;
             try {
                 String sql = "DELETE FROM "+ clientsTable +" WHERE id = ?";
                 PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
@@ -36,16 +38,18 @@ public class QueryDAO {
                 stmt.executeUpdate();
                 System.out.println("Query deleteClient is complete!");
             } catch (SQLException ex){
+                deleteSuccessful = false;
                 System.err.println("Query deleteClient is failed...");
                 System.err.println(ex);
             }
+            return deleteSuccessful;
     }
 
-    public static TreeSet<Client> getClients() {
-        TreeSet<Client> clients = new TreeSet<Client>();
+    public static ArrayList<Client> getClients() {
+        ArrayList<Client> clients = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM " + clientsTable;
+            String sql = "SELECT id,firstName,surName,lastName,phone_number,inn,address FROM " + clientsTable;
             //PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
             //stmt.executeUpdate();
             Statement stmt = ConnectionDAO.getConnection().createStatement();
@@ -60,7 +64,15 @@ public class QueryDAO {
                 String address = resultSet.getString(7);
                 Client client = new Client(id, firstName, surName, lastName,phoneNumber,inn,address);
                 clients.add(client);
+                }
+            for (Client cl:clients) {
+                System.out.println("Client: id = " + cl.getId()
+                        + ", Full name: " + cl.getSurName() + " " + cl.getFirstName() + " " + cl.getLastName()
+                        +", Phone: " + cl.getPhoneNumber()
+                        +", INN: "+cl.getInn()
+                        +", Address: "+cl.getAddress());
             }
+
             System.out.println("Query getClients is complete!");
         } catch (SQLException ex){
             System.err.println("Query getClients is failed...");
@@ -72,9 +84,8 @@ public class QueryDAO {
     public static Client selectIdClient(Integer id) {
         Client client = null;
         try{
-            String sql = "SELECT * FROM " + clientsTable + " WHERE id=?";
+            String sql = "SELECT id FROM " + clientsTable;
             PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
-            stmt.setInt(1, id);
             stmt.executeUpdate();
             ResultSet resultSet = stmt.executeQuery();
             if(resultSet.next()) {

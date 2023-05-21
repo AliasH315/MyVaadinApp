@@ -18,9 +18,14 @@ import org.iismagilov.model.QueryDAO;
 public class ClientMenuView extends VerticalLayout {
 
     public ClientMenuView() {
-        initClientMenuView();
+        init();
     }
 
+    private void init(){
+        QueryDAO.getClients();
+        System.out.println("Initializing Clients is complete");
+        initClientMenuView();
+    }
     private Component initClientMenuView() {
         VerticalLayout clientLayout = new VerticalLayout();
         Button buttonClientAdd = new Button("Создать клиента");
@@ -52,10 +57,9 @@ public class ClientMenuView extends VerticalLayout {
             QueryDAO.updateClient(3,"wer2","dfg2","sdfsd2f","9172434364","343453453","Nfegfg");
 
         });
-        // Не реализовано
         buttonClientDelete.addClickListener(click -> {
-            DeleteClient deleteClient = new DeleteClient();
-            deleteClient.deleteClient();
+            getUI().ifPresent(ui ->
+                    ui.navigate("deleteClient"));
         });
 
         buttonReturn.addClickListener(click -> {
@@ -64,4 +68,5 @@ public class ClientMenuView extends VerticalLayout {
         });
         return clientLayout;
     }
+
 }
