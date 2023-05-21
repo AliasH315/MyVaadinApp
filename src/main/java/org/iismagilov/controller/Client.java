@@ -1,12 +1,5 @@
 package org.iismagilov.controller;
 
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.Binder;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 public class Client {
 
     //public ArrayList<Client> clients;
