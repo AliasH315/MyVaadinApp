@@ -12,10 +12,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.iismagilov.model.QueryDAO;
-import org.iismagilov.views.ClientMenuView;
 import org.iismagilov.views.MainLayout;
-
-import java.util.Set;
 @Route(value="deleteClient", layout = MainLayout.class)
 @PageTitle("Удаление клиента | Vaadin App by Ilyas")
 public class DeleteClient extends VerticalLayout {
@@ -28,7 +25,6 @@ public class DeleteClient extends VerticalLayout {
 
     Integer idClient;
 
-    TextField fieldFullName;
     private void initDeleteClient() {
         formLayout = new VerticalLayout();
         H1 text = new H1("Окно удаления клиента:");
