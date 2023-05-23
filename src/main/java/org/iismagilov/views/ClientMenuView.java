@@ -3,14 +3,10 @@ package org.iismagilov.views;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.iismagilov.controller.CreateClient;
-import org.iismagilov.controller.DeleteClient;
 import org.iismagilov.model.QueryDAO;
 
 @Route(value="clientMenu", layout = MainLayout.class)
@@ -30,8 +26,8 @@ public class ClientMenuView extends VerticalLayout {
         VerticalLayout clientLayout = new VerticalLayout();
         Button buttonClientAdd = new Button("Создать клиента");
         buttonClientAdd.addThemeVariants(ButtonVariant.LUMO_LARGE);
-        Button buttonClientLook = new Button("Просмотреть клиента");
-        buttonClientLook.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        Button buttonClientBrowse = new Button("Просмотреть клиента");
+        buttonClientBrowse.addThemeVariants(ButtonVariant.LUMO_LARGE);
         Button buttonClientUpdate = new Button("Редактировать клиента");
         buttonClientUpdate.addThemeVariants(ButtonVariant.LUMO_LARGE);
         Button buttonClientDelete = new Button("Удалить клиента");
@@ -42,7 +38,7 @@ public class ClientMenuView extends VerticalLayout {
                 new H1("Операции с клиентами:"),
                 clientLayout,
                 buttonClientAdd,
-                buttonClientLook,
+                buttonClientBrowse,
                 buttonClientUpdate,
                 buttonClientDelete,
                 buttonReturn
@@ -52,9 +48,13 @@ public class ClientMenuView extends VerticalLayout {
             getUI().ifPresent(ui ->
                     ui.navigate("createClient"));
         });
+
+        buttonClientBrowse.addClickListener(click -> {
+            getUI().ifPresent(ui ->
+                    ui.navigate("browseClient"));
+        });
         // Не реализовано
         buttonClientUpdate.addClickListener(click -> {
-            QueryDAO.updateClient(3,"wer2","dfg2","sdfsd2f","9172434364","343453453","Nfegfg");
 
         });
         buttonClientDelete.addClickListener(click -> {

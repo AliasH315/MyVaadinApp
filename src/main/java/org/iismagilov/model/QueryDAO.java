@@ -49,8 +49,6 @@ public class QueryDAO {
 
         try {
             String sql = "SELECT id,firstName,surName,lastName,phone_number,inn,address FROM " + clientsTable;
-            //PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
-            //stmt.executeUpdate();
             Statement stmt = ConnectionDAO.getConnection().createStatement();
             ResultSet resultSet = stmt.executeQuery(sql);
             while(resultSet.next()){
@@ -61,7 +59,7 @@ public class QueryDAO {
                 String phoneNumber = resultSet.getString(5);
                 String inn = resultSet.getString(6);
                 String address = resultSet.getString(7);
-                Client client = new Client(id, firstName, surName, lastName,phoneNumber,inn,address);
+                Client client = new Client(id, firstName, surName, lastName, phoneNumber, inn, address);
                 clients.add(client);
                 }
             for (Client cl:clients) {
@@ -80,19 +78,26 @@ public class QueryDAO {
         return clients;
     }
 
-    public static Client selectIdClient(Integer id) {
+    public static Client selectClient(Integer id) {
         Client client = null;
         try{
-            String sql = "SELECT id FROM " + clientsTable;
+            String sql = "SELECT id,firstName,surName,lastName,phone_number,inn,address FROM "
+                    + clientsTable + " WHERE id = ?";
             PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
-            stmt.executeUpdate();
+            stmt.setInt(1, id);
             ResultSet resultSet = stmt.executeQuery();
             if(resultSet.next()) {
-                Integer idLocal = resultSet.getInt(1);
-                client = new Client(idLocal);
+                Integer idClient = resultSet.getInt(1);
+                String firstName = resultSet.getString(2);
+                String surName = resultSet.getString(3);
+                String lastName = resultSet.getString(4);
+                String phoneNumber = resultSet.getString(5);
+                String inn = resultSet.getString(6);
+                String address = resultSet.getString(7);
+                client = new Client(idClient, firstName, surName, lastName, phoneNumber, inn, address);
             }
         } catch (SQLException ex){
-            System.err.println("Query selectIdClient is failed...");
+            System.err.println("Query selectClient is failed...");
             System.err.println(ex);
         }
         return client;

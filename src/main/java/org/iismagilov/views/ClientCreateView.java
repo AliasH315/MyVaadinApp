@@ -1,4 +1,4 @@
-package org.iismagilov.controller;
+package org.iismagilov.views;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -16,9 +16,9 @@ import org.iismagilov.views.MainLayout;
  */
 @Route(value="createClient", layout = MainLayout.class)
 @PageTitle("Создание клиента | Vaadin App by Ilyas")
-public class CreateClient extends VerticalLayout {
+public class ClientCreateView extends VerticalLayout {
 
-    public CreateClient(){
+    public ClientCreateView(){
         System.out.println("Class createClient is start");
         initCreateClient();
     }

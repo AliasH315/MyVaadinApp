@@ -1,4 +1,4 @@
-package org.iismagilov.controller;
+package org.iismagilov.views;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -10,14 +10,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.iismagilov.controller.Client;
 import org.iismagilov.model.QueryDAO;
-import org.iismagilov.views.MainLayout;
+
 @Route(value="deleteClient", layout = MainLayout.class)
 @PageTitle("Удаление клиента | Vaadin App by Ilyas")
-public class DeleteClient extends VerticalLayout {
+public class ClientDeleteView extends VerticalLayout {
 
-    public DeleteClient(){
-        System.out.println("Class deleteClient is start");
+    public ClientDeleteView(){
         initDeleteClient();
     }
     VerticalLayout formLayout;
@@ -38,18 +38,16 @@ public class DeleteClient extends VerticalLayout {
     private Component deleteClient(){
         VerticalLayout layoutDelete = new VerticalLayout();
         ComboBox<Client> comboBox = new ComboBox<>("Какого клиента необходимо удалить?");
-        comboBox.setWidth("500px");
+        comboBox.setWidth("400px");
         comboBox.setAllowCustomValue(true);
         //comboBox.setNullSelectionAllowed(false);
         comboBox.setPlaceholder("Выберите клиента...");
         comboBox.setItems(QueryDAO.getClients());
         comboBox.setItemLabelGenerator(selectClient -> {
             idClient = selectClient.getId();
-            return "id: "+ selectClient.getId()
-                    + ", full name: "+ selectClient.getSurName() + " " + selectClient.getFirstName() + " " + selectClient.getLastName();
+            return selectClient.getSurName() + " " + selectClient.getFirstName() + " " + selectClient.getLastName();
         });
-        add(comboBox);
-        System.out.println("Method deleteClient(): comboBox is create");
+        //add(comboBox);
         Button deleteButton = new Button("Удалить", (delete) -> {
             Dialog dialog = new Dialog();
             dialog.setHeaderTitle("Вы действительно хотите удалить данного клиента?");
