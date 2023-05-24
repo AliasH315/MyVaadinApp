@@ -64,7 +64,7 @@ public class ClientBrowseView extends VerticalLayout {
     }
 
     private Button exit(){
-        Button cancelButton = new Button("Отменить",(Exit) -> {
+        Button cancelButton = new Button("Отменить",click -> {
             getUI().ifPresent(ui ->
                     ui.navigate("clientMenu"));
         });
