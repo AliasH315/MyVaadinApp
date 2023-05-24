@@ -116,10 +116,9 @@ public class ClientUpdateView extends VerticalLayout {
     }
 
     private Button exit(){
-        Button cancelButton = new Button("Отменить",click -> {
+        Button cancelButton = new Button("Отменить",click ->
             getUI().ifPresent(ui ->
-                    ui.navigate("clientMenu"));
-        });
+                    ui.navigate("clientMenu")));
         return cancelButton;
     }
 
