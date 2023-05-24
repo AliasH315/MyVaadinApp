@@ -29,7 +29,6 @@ public class ClientUpdateView extends VerticalLayout {
     Integer idClient;
 
     public ClientUpdateView(){
-        System.out.println("Class updateClient is start");
         initUpdateClient();
     }
 
@@ -57,7 +56,10 @@ public class ClientUpdateView extends VerticalLayout {
                 comboBox,
                 new HorizontalLayout(selectButton, returnButton)
         );
-        add(updateLayout);
+        add(
+                text,
+                updateLayout
+        );
         System.out.println("Method browseClient() is complete");
     }
 
