@@ -47,7 +47,6 @@ public class ClientDeleteView extends VerticalLayout {
             idClient = selectClient.getId();
             return selectClient.getSurName() + " " + selectClient.getFirstName() + " " + selectClient.getLastName();
         });
-        //add(comboBox);
         Button deleteButton = new Button("Удалить", (delete) -> {
             Dialog dialog = new Dialog();
             dialog.setHeaderTitle("Вы действительно хотите удалить данного клиента?");

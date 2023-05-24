@@ -53,9 +53,9 @@ public class ClientMenuView extends VerticalLayout {
             getUI().ifPresent(ui ->
                     ui.navigate("browseClient"));
         });
-        // Не реализовано
         buttonClientUpdate.addClickListener(click -> {
-
+            getUI().ifPresent(ui ->
+                    ui.navigate("updateClient"));
         });
         buttonClientDelete.addClickListener(click -> {
             getUI().ifPresent(ui ->

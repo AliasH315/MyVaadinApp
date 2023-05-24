@@ -1,3 +1,7 @@
+/*
+* Основной класс который с помощью vaadin framework
+* запускает наше основное меню по ссылке в браузере https:\\localhost:8080
+ */
 package org.iismagilov.views;
 
         import com.vaadin.flow.component.Component;

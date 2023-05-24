@@ -42,7 +42,7 @@ public class ClientCreateView extends VerticalLayout {
         System.out.println("Method createClient() is complete");
     }
     private Component createFIOForm(){
-        VerticalLayout layoutFIO = new VerticalLayout();
+        VerticalLayout fioLayout = new VerticalLayout();
         fieldFirstName = new TextField("Имя клиента:");
         fieldFirstName.setWidth("300px");
 
@@ -56,64 +56,64 @@ public class ClientCreateView extends VerticalLayout {
             if (fieldFirstName.isEmpty() || fieldSurName.isEmpty() || fieldLastName.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить все поля!");
             }  else {
-                layoutFIO.removeFromParent();
+                fioLayout.removeFromParent();
                 createPhoneForm();
             }
         });
 
-        layoutFIO.add(
+        fioLayout.add(
                 fieldFirstName,
                 fieldSurName,
                 fieldLastName,
                 new HorizontalLayout(nextButton, cancelButton)
         );
         System.out.println("Method createFIOForm() is complete");
-        return layoutFIO;
+        return fioLayout;
     }
 
     private void createPhoneForm(){
-        VerticalLayout layoutPhone = new VerticalLayout();
+        VerticalLayout phoneLayout = new VerticalLayout();
         fieldPhone = new TextField("Номер телефона:");
         fieldPhone.setWidth("300px");
         Button nextButton = new Button("Далее", (Next) -> {
             if (fieldPhone.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить номер телефона!");
             } else {
-                layoutPhone.removeFromParent();
+                phoneLayout.removeFromParent();
                 createInnForm();
             }
         });
         Button cancelButton = exit();
-        layoutPhone.add(
+        phoneLayout.add(
                 fieldPhone,
                 new HorizontalLayout(nextButton, cancelButton)
         );
-        add(layoutPhone);
+        add(phoneLayout);
         System.out.println("Method createPhoneForm() is complete");
     }
 
     private void createInnForm() {
-        VerticalLayout layoutInn = new VerticalLayout();
+        VerticalLayout innLayout = new VerticalLayout();
         fieldInn = new TextField("ИНН:");
         fieldInn.setWidth("300px");
         Button nextButton = new Button("Далее", (Next) -> {
             if (fieldInn.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить ИНН!");
             } else {
-                layoutInn.removeFromParent();
+                innLayout.removeFromParent();
                 createAddressForm();
             }
         });
         Button cancelButton = exit();
-        layoutInn.add(
+        innLayout.add(
                 fieldInn,
                 new HorizontalLayout(nextButton, cancelButton)
         );
-        add(layoutInn);
+        add(innLayout);
         System.out.println("Method createInnForm() is complete");
     }
     private void createAddressForm() {
-        VerticalLayout layoutAddress = new VerticalLayout();
+        VerticalLayout addressLayout = new VerticalLayout();
         fieldAddress = new TextField("Место жительства:");
         fieldAddress.setWidth("300px");
         Button saveButton = new Button("Сохранить", (Save) -> {
@@ -134,11 +134,11 @@ public class ClientCreateView extends VerticalLayout {
             }
         });
         Button cancelButton = exit();
-        layoutAddress.add(
+        addressLayout.add(
                 fieldAddress,
                 new HorizontalLayout(saveButton, cancelButton)
         );
-        add(layoutAddress);
+        add(addressLayout);
         System.out.println("Class createClient complete is successfully!");
     }
 

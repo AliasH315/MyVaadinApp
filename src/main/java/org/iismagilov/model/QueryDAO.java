@@ -48,7 +48,7 @@ public class QueryDAO {
         ArrayList<Client> clients = new ArrayList<>();
 
         try {
-            String sql = "SELECT id,firstName,surName,lastName,phone_number,inn,address FROM " + clientsTable;
+            String sql = "SELECT id,firstName,surName,lastName,phone_number,inn,address FROM " + clientsTable + " ORDER BY 3";
             Statement stmt = ConnectionDAO.getConnection().createStatement();
             ResultSet resultSet = stmt.executeQuery(sql);
             while(resultSet.next()){
@@ -105,30 +105,62 @@ public class QueryDAO {
 
     public static void updateClient(Integer id, String firstName, String surName, String lastName, String phone_number, String inn, String address){
         try {
-            String sql = null;
+            String sql = "UPDATE " + clientsTable + " SET ";
+            Boolean isFirstAgr = true;
             if (!firstName.isEmpty()) {
-                sql = "UPDATE "+ clientsTable +" SET firstName = " + firstName + "where id = " + id;
+                sql = sql + "firstName = '" + firstName + "'";
+                isFirstAgr = false;
             }
+
             if (!surName.isEmpty()) {
-                sql = "UPDATE "+ clientsTable +" SET surName = " + surName + "where id = " + id;
+                if (!isFirstAgr) {
+                    sql = sql + ", surName = '" + surName + "'";
+                } else {
+                    sql = sql + "surName = '" + surName + "'";
+                    isFirstAgr = false;
+                }
             }
+
             if (!lastName.isEmpty()) {
-                sql = "UPDATE "+ clientsTable +" SET lastName = " + lastName + "where id = " + id;
+                if (!isFirstAgr) {
+                    sql = sql + ", lastName = '" + lastName + "'";
+                } else {
+                    sql = sql + "lastName = '" + lastName + "'";
+                    isFirstAgr = false;
+                }
             }
+
             if (!phone_number.isEmpty()) {
-                sql = "UPDATE "+ clientsTable +" SET phone_number = " + phone_number + "where id = " + id;
+                if (!isFirstAgr) {
+                    sql = sql + ", phone_number = '" + phone_number + "'";
+                } else {
+                    sql = sql + "phone_number = '" + phone_number + "'";
+                    isFirstAgr = false;
+                }
             }
+
             if (!inn.isEmpty()) {
-                sql = "UPDATE "+ clientsTable +" SET inn = " + inn + "where id = " + id;
+                if (!isFirstAgr) {
+                    sql = sql + ", inn = '" + inn + "'";
+                } else {
+                    sql = sql + "inn = '" + inn + "'";
+                    isFirstAgr = false;
+                }
             }
+
             if (!address.isEmpty()) {
-                sql = "UPDATE "+ clientsTable +" SET address = " + address + "where id = " + id;
+                if (!isFirstAgr) {
+                    sql = sql + ", address = '" + address + "'";
+                } else {
+                    sql = sql + "address = '" + address + "'";
+                }
             }
-        if (!sql.isEmpty()){
+
+            sql = sql + " WHERE id = ?";
         PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
+        stmt.setInt(1, id);
         stmt.executeUpdate();
         System.out.println("Query updateClient is complete!");
-        }
         } catch (SQLException ex){
             System.err.println("Query updateClient is failed...");
             System.err.println(ex);

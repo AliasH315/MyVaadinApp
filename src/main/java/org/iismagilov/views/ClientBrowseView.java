@@ -4,7 +4,6 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -35,7 +34,7 @@ public class ClientBrowseView extends VerticalLayout {
     }
     private Component browseClient(){
         System.out.println("Method browseClient(): is start");
-        VerticalLayout layoutBrowse = new VerticalLayout();
+        VerticalLayout browseLayout = new VerticalLayout();
         ComboBox<Client> comboBox = new ComboBox<>("Сведения о клиенте");
         comboBox.setWidth("400px");
         comboBox.setAllowCustomValue(true);
@@ -46,26 +45,26 @@ public class ClientBrowseView extends VerticalLayout {
             System.out.println("Method browseClient(): select idClient = "+ idClient);
             return selectClient.getSurName() + " " + selectClient.getFirstName() + " " + selectClient.getLastName();
         });
-        layoutBrowse.add(comboBox);
+        browseLayout.add(comboBox);
         System.out.println("Method browseClient(): clientInfo idClient = "+ idClient);
         Button browseButton = new Button("Просмотр", (browse) -> {
             add(
             clientInfo(idClient)
             );
         });
-        Button returnButton = returning();
+        Button returnButton = exit();
 
-        layoutBrowse.add(
+        browseLayout.add(
                 comboBox,
                 new HorizontalLayout(browseButton,returnButton)
         );
-        add(layoutBrowse);
+        add(browseLayout);
         System.out.println("Method browseClient() is complete");
-        return layoutBrowse;
+        return browseLayout;
     }
 
-    private Button returning(){
-        Button cancelButton = new Button("Назад",(Exit) -> {
+    private Button exit(){
+        Button cancelButton = new Button("Отменить",(Exit) -> {
             getUI().ifPresent(ui ->
                     ui.navigate("clientMenu"));
         });
