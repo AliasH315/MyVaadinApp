@@ -44,28 +44,26 @@ public class ClientMenuView extends VerticalLayout {
                 buttonReturn
         );
 
-        buttonClientAdd.addClickListener(click -> {
+        buttonClientAdd.addClickListener(click ->
             getUI().ifPresent(ui ->
-                    ui.navigate("createClient"));
-        });
+                    ui.navigate("createClient")));
 
-        buttonClientBrowse.addClickListener(click -> {
+        buttonClientBrowse.addClickListener(click ->
             getUI().ifPresent(ui ->
-                    ui.navigate("browseClient"));
-        });
-        buttonClientUpdate.addClickListener(click -> {
-            getUI().ifPresent(ui ->
-                    ui.navigate("updateClient"));
-        });
-        buttonClientDelete.addClickListener(click -> {
-            getUI().ifPresent(ui ->
-                    ui.navigate("deleteClient"));
-        });
+                    ui.navigate("browseClient")));
 
-        buttonReturn.addClickListener(click -> {
+        buttonClientUpdate.addClickListener(click ->
             getUI().ifPresent(ui ->
-                    ui.navigate(""));
-        });
+                    ui.navigate("updateClient")));
+
+        buttonClientDelete.addClickListener(click ->
+            getUI().ifPresent(ui ->
+                    ui.navigate("deleteClient")));
+
+        buttonReturn.addClickListener(click ->
+            getUI().ifPresent(ui ->
+                    ui.navigate("")));
+
         return clientLayout;
     }
 

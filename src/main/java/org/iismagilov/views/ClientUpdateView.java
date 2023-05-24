@@ -47,9 +47,9 @@ public class ClientUpdateView extends VerticalLayout {
         });
         updateLayout.add(comboBox);
         System.out.println("Method updateClient(): clientInfo idClient = " + idClient);
-        Button selectButton = new Button("Выбрать", (browse) -> {
-            updateClient(idClient);
-        });
+        Button selectButton = new Button("Выбрать", (browse) ->
+            updateClient(idClient)
+        );
         Button returnButton = exit();
 
         updateLayout.add(

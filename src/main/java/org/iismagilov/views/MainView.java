@@ -32,16 +32,16 @@ public class MainView extends VerticalLayout {
         Button buttonReturnMainMenu = new Button("Выход из программы");
         buttonReturnMainMenu.addThemeVariants(ButtonVariant.LUMO_LARGE);
 
-        buttonClientMenu.addClickListener(click -> {
+        buttonClientMenu.addClickListener(click ->
             getUI().ifPresent(ui ->
-                    ui.navigate("/clientMenu"));
-        });
+                    ui.navigate("/clientMenu")));
+
         buttonClientMenu.addClickShortcut(Key.ENTER);
 
-        buttonAccountMenu.addClickListener(click -> {
+        buttonAccountMenu.addClickListener(click ->
             getUI().ifPresent(ui ->
-                    ui.navigate("/accountMenu"));
-        });
+                    ui.navigate("/accountMenu")));
+
         buttonAccountMenu.addClickShortcut(Key.ENTER);
 
         buttonReturnMainMenu.addClickListener(click -> {
