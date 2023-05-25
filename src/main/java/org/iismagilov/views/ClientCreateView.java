@@ -23,13 +23,13 @@ public class ClientCreateView extends VerticalLayout {
         initCreateClient();
     }
 
-    VerticalLayout formLayout;
-    TextField fieldFirstName;
-    TextField fieldSurName;
-    TextField fieldLastName;
-    TextField fieldPhone;
-    TextField fieldInn;
-    TextField fieldAddress;
+    private VerticalLayout formLayout;
+    private TextField fieldFirstName;
+    private TextField fieldSurName;
+    private TextField fieldLastName;
+    private TextField fieldPhone;
+    private TextField fieldInn;
+    private TextField fieldAddress;
     private void initCreateClient() {
         formLayout = new VerticalLayout();
         H1 text = new H1("Окно создания клиента:");
@@ -45,12 +45,16 @@ public class ClientCreateView extends VerticalLayout {
         VerticalLayout fioLayout = new VerticalLayout();
         fieldFirstName = new TextField("Имя клиента:");
         fieldFirstName.setWidth("300px");
+        fieldFirstName.setMaxLength(30);
 
         fieldSurName = new TextField("Фамилия клиента:");
         fieldSurName.setWidth("300px");
+        fieldSurName.setMaxLength(50);
 
         fieldLastName = new TextField("Отчество клиента:");
         fieldLastName.setWidth("300px");
+        fieldLastName.setMaxLength(30);
+
         Button cancelButton = exit();
         Button nextButton = new Button("Далее", (Next) -> {
             if (fieldFirstName.isEmpty() || fieldSurName.isEmpty() || fieldLastName.isEmpty()){
@@ -75,6 +79,8 @@ public class ClientCreateView extends VerticalLayout {
         VerticalLayout phoneLayout = new VerticalLayout();
         fieldPhone = new TextField("Номер телефона:");
         fieldPhone.setWidth("300px");
+        fieldPhone.setMaxLength(16);
+
         Button nextButton = new Button("Далее", (Next) -> {
             if (fieldPhone.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить номер телефона!");
@@ -96,6 +102,8 @@ public class ClientCreateView extends VerticalLayout {
         VerticalLayout innLayout = new VerticalLayout();
         fieldInn = new TextField("ИНН:");
         fieldInn.setWidth("300px");
+        fieldInn.setMaxLength(12);
+
         Button nextButton = new Button("Далее", (Next) -> {
             if (fieldInn.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить ИНН!");
@@ -116,6 +124,8 @@ public class ClientCreateView extends VerticalLayout {
         VerticalLayout addressLayout = new VerticalLayout();
         fieldAddress = new TextField("Место жительства:");
         fieldAddress.setWidth("300px");
+        fieldAddress.setMaxLength(100);
+
         Button saveButton = new Button("Сохранить", (Save) -> {
             if (fieldAddress.isEmpty()) {
                 notification("ВНИМАНИЕ! Необходимо заполнить место жительства!");
@@ -134,6 +144,7 @@ public class ClientCreateView extends VerticalLayout {
             }
         });
         Button cancelButton = exit();
+
         addressLayout.add(
                 fieldAddress,
                 new HorizontalLayout(saveButton, cancelButton)

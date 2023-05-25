@@ -17,16 +17,23 @@ import org.iismagilov.model.QueryDAO;
 @PageTitle("Редактирование клиента | Vaadin App by Ilyas")
 public class ClientUpdateView extends VerticalLayout {
 
-    VerticalLayout updateLayout;
+    private VerticalLayout updateLayout;
+    private TextField fieldFirstName;
+    private  TextField fieldSurName;
+    private TextField fieldLastName;
+    private TextField fieldPhone;
+    private TextField fieldInn;
+    private TextField fieldAddress;
 
-    TextField fieldFirstName;
-    TextField fieldSurName;
-    TextField fieldLastName;
-    TextField fieldPhone;
-    TextField fieldInn;
-    TextField fieldAddress;
+    private Integer idClient;
+    private String firstName;
+    private String surName;
+    private  String lastName;
+    private String phone;
+    private String inn;
+    private String address;
 
-    Integer idClient;
+    private Boolean isFirstForm = true;
 
     public ClientUpdateView(){
         initUpdateClient();
@@ -34,6 +41,7 @@ public class ClientUpdateView extends VerticalLayout {
 
     private void initUpdateClient() {
         updateLayout = new VerticalLayout();
+        System.out.println("Method initUpdateClient() is START!");
         H1 text = new H1("Окно редактирования клиента:");
         ComboBox<Client> comboBox = new ComboBox<>("Какого клиента необходимо редактировать?");
         comboBox.setWidth("400px");
@@ -42,14 +50,19 @@ public class ClientUpdateView extends VerticalLayout {
         comboBox.setItems(QueryDAO.getClients());
         comboBox.setItemLabelGenerator(selectClient -> {
             idClient = selectClient.getId();
-            System.out.println("Method updateClient(): select idClient = " + idClient);
+            surName = selectClient.getSurName();
+            firstName = selectClient.getFirstName();
+            lastName = selectClient.getLastName();
+            phone = selectClient.getPhoneNumber();
+            inn = selectClient.getInn();
+            address = selectClient.getAddress();
             return selectClient.getSurName() + " " + selectClient.getFirstName() + " " + selectClient.getLastName();
         });
-        updateLayout.add(comboBox);
-        System.out.println("Method updateClient(): clientInfo idClient = " + idClient);
-        Button selectButton = new Button("Выбрать", (browse) ->
-            updateClient(idClient)
-        );
+        Button selectButton = new Button("Выбрать", click -> {
+            updateClient(idClient);
+            updateLayout.removeFromParent();
+        });
+
         Button returnButton = exit();
 
         updateLayout.add(
@@ -60,31 +73,43 @@ public class ClientUpdateView extends VerticalLayout {
                 text,
                 updateLayout
         );
-        System.out.println("Method browseClient() is complete");
+        System.out.println("Method initUpdateClient() is FINISH!");
     }
 
     private void updateClient(Integer idClient) {
         FormLayout formLayout = new FormLayout();
         fieldFirstName = new TextField("Имя клиента:");
         fieldFirstName.setWidth("300px");
+        fieldFirstName.setValue(firstName);
+        fieldFirstName.setMaxLength(30);
 
         fieldSurName = new TextField("Фамилия клиента:");
         fieldSurName.setWidth("300px");
+        fieldSurName.setValue(surName);
+        fieldSurName.setMaxLength(50);
 
         fieldLastName = new TextField("Отчество клиента:");
         fieldLastName.setWidth("300px");
+        fieldLastName.setValue(lastName);
+        fieldLastName.setMaxLength(30);
 
         fieldPhone = new TextField("Номер телефона:");
         fieldPhone.setWidth("300px");
+        fieldPhone.setValue(phone);
+        fieldPhone.setMaxLength(16);
 
         fieldInn = new TextField("ИНН:");
         fieldInn.setWidth("300px");
+        fieldInn.setValue(inn);
+        fieldInn.setMaxLength(12);
 
         fieldAddress = new TextField("Место жительства:");
         fieldAddress.setWidth("300px");
+        fieldAddress.setValue(address);
+        fieldAddress.setMaxLength(100);
 
         Button cancelButton = exit();
-        Button saveButton = new Button("Сохранить", (Save) -> {
+        Button saveButton = new Button("Сохранить", click -> {
             if (fieldFirstName.isEmpty() && fieldSurName.isEmpty() && fieldLastName.isEmpty()
                     && fieldPhone.isEmpty() && fieldInn.isEmpty() && fieldAddress.isEmpty()) {
                 notification("ВНИМАНИЕ! Необходимо изменить хотя бы один параметр!");
@@ -103,8 +128,8 @@ public class ClientUpdateView extends VerticalLayout {
             }
         });
         formLayout.add(
-                fieldFirstName,
                 fieldSurName,
+                fieldFirstName,
                 fieldLastName,
                 fieldPhone,
                 fieldInn,
@@ -112,7 +137,6 @@ public class ClientUpdateView extends VerticalLayout {
                 new HorizontalLayout(saveButton, cancelButton)
         );
         add(formLayout);
-
     }
 
     private Button exit(){

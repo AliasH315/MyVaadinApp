@@ -18,9 +18,9 @@ public class ClientBrowseView extends VerticalLayout {
     public ClientBrowseView(){
         initBrowseClient();
     }
-    VerticalLayout formLayout;
+    private VerticalLayout formLayout;
 
-    Integer idClient;
+    private Integer idClient;
 
     private void initBrowseClient() {
         formLayout = new VerticalLayout();

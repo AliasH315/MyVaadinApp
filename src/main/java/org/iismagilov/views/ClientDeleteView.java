@@ -20,9 +20,9 @@ public class ClientDeleteView extends VerticalLayout {
     public ClientDeleteView(){
         initDeleteClient();
     }
-    VerticalLayout formLayout;
+    private VerticalLayout formLayout;
 
-    Integer idClient;
+    private Integer idClient;
 
     private void initDeleteClient() {
         formLayout = new VerticalLayout();
