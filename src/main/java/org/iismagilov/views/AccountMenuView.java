@@ -12,7 +12,6 @@ import com.vaadin.flow.router.Route;
 public class AccountMenuView extends VerticalLayout {
     public AccountMenuView() {
         VerticalLayout accountLayout = new VerticalLayout();
-        //VerticalLayout accountLayout = new VerticalLayout();
         Button buttonOpenAccount = new Button("Открыть счет клиенту");
         buttonOpenAccount.addThemeVariants(ButtonVariant.LUMO_LARGE);
         Button buttonUpdateAccount = new Button("Редактировать счет клиента");
@@ -26,10 +25,22 @@ public class AccountMenuView extends VerticalLayout {
         Button buttonReturn = new Button("Вернуться назад");
         buttonReturn.addThemeVariants(ButtonVariant.LUMO_LARGE);
 
-        buttonReturn.addClickListener(click -> {
+        buttonOpenAccount.addClickListener(click ->
             getUI().ifPresent(ui ->
-                    ui.navigate(""));
-        });
+                    ui.navigate("createAccount")));
+
+        buttonUpdateAccount.addClickListener(click ->
+                getUI().ifPresent(ui ->
+                        ui.navigate("updateAccount")));
+
+        buttonCloseAccount.addClickListener(click ->
+                getUI().ifPresent(ui ->
+                        ui.navigate("deleteAccount")));
+
+        buttonReturn.addClickListener(click ->
+            getUI().ifPresent(ui ->
+                    ui.navigate("")));
+
         add(
                 new H1("Операции со счетами:"),
                 accountLayout,

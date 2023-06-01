@@ -1,16 +1,19 @@
 package org.iismagilov.model;
 
+import org.iismagilov.controller.Account;
 import org.iismagilov.controller.Client;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QueryDAO {
 
     private final static String clientsTable = "CLIENTS";
     private final static String accountsTable = "ACCOUNTS";
 
-    public static void insertClient(String firstName, String surName, String lastName, String phone_number, String inn, String address) {
+    public static void insertClient(String firstName, String surName, String lastName, String phoneNumber, String inn, String address) {
         try {
         String sql = "INSERT INTO " + clientsTable
                 + "(firstName,surName,lastName,phone_number,inn,address) VALUES (?, ?, ?, ?, ?, ?)";
@@ -18,13 +21,30 @@ public class QueryDAO {
         stmt.setString(1, firstName);
         stmt.setString(2, surName);
         stmt.setString(3, lastName);
-        stmt.setString(4, phone_number);
+        stmt.setString(4, phoneNumber);
         stmt.setString(5, inn);
         stmt.setString(6, address);
         stmt.executeUpdate();
         System.out.println("Query insertClient is complete!");
         } catch (SQLException ex){
             System.err.println("Query insertClient is failed...");
+            System.err.println(ex);
+        }
+    }
+
+    public static void insertAccount(Integer idClient, String accountNumber, String bik, String currency) {
+        try {
+            String sql = "INSERT INTO " + accountsTable
+                    + "(id_client,account_number,bik,currency) VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
+            stmt.setInt(1, idClient);
+            stmt.setString(2, accountNumber);
+            stmt.setString(3, bik);
+            stmt.setString (4, currency);
+            stmt.executeUpdate();
+            System.out.println("Query insertAccount is complete!");
+        } catch (SQLException ex){
+            System.err.println("Query insertAccount is failed...");
             System.err.println(ex);
         }
     }
@@ -63,11 +83,7 @@ public class QueryDAO {
                 clients.add(client);
                 }
             for (Client cl:clients) {
-                System.out.println("Client: id = " + cl.getId()
-                        + ", Full name: " + cl.getSurName() + " " + cl.getFirstName() + " " + cl.getLastName()
-                        +", Phone: " + cl.getPhoneNumber()
-                        +", INN: "+cl.getInn()
-                        +", Address: "+cl.getAddress());
+                System.out.println(cl.toString());
             }
 
             System.out.println("Query getClients is complete!");
@@ -103,6 +119,34 @@ public class QueryDAO {
         return client;
     }
 
+    public static List<Account> selectAccounts(Integer id) {
+        ArrayList<Account> accounts = new ArrayList<>();
+        try{
+            String sql = "SELECT id,account_number,summa,currency,bik,status FROM "
+                    + accountsTable + " WHERE id_client = ?";
+            PreparedStatement stmt = ConnectionDAO.getConnection().prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet resultSet = stmt.executeQuery();
+            while(resultSet.next()) {
+                Integer idAccount = resultSet.getInt(1);
+                Integer idClient = id;
+                String accountNumber = resultSet.getString(2);
+                BigDecimal summa = resultSet.getBigDecimal(3);
+                String currency = resultSet.getString(4);
+                String bik = resultSet.getString(5);
+                String status = resultSet.getString(6);
+                Account account = new Account(idAccount,idClient, accountNumber, summa, currency, bik, status);
+                accounts.add(account);
+            }
+            for (Account acc:accounts) {
+                System.out.println(acc.toString());
+            }
+        } catch (SQLException ex){
+            System.err.println("Query selectAccounts is failed...");
+            System.err.println(ex);
+        }
+        return accounts;
+    }
     public static void updateClient(Integer id, String firstName, String surName, String lastName, String phone_number, String inn, String address){
         try {
             String sql = "UPDATE " + clientsTable + " SET ";

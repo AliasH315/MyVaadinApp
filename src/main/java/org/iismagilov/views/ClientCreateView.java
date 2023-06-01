@@ -19,7 +19,6 @@ import org.iismagilov.views.MainLayout;
 public class ClientCreateView extends VerticalLayout {
 
     public ClientCreateView(){
-        System.out.println("Class createClient is start");
         initCreateClient();
     }
 
@@ -56,7 +55,7 @@ public class ClientCreateView extends VerticalLayout {
         fieldLastName.setMaxLength(30);
 
         Button cancelButton = exit();
-        Button nextButton = new Button("Далее", (Next) -> {
+        Button nextButton = new Button("Далее", click -> {
             if (fieldFirstName.isEmpty() || fieldSurName.isEmpty() || fieldLastName.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить все поля!");
             }  else {
@@ -81,7 +80,7 @@ public class ClientCreateView extends VerticalLayout {
         fieldPhone.setWidth("300px");
         fieldPhone.setMaxLength(16);
 
-        Button nextButton = new Button("Далее", (Next) -> {
+        Button nextButton = new Button("Далее", click -> {
             if (fieldPhone.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить номер телефона!");
             } else {
@@ -104,7 +103,7 @@ public class ClientCreateView extends VerticalLayout {
         fieldInn.setWidth("300px");
         fieldInn.setMaxLength(12);
 
-        Button nextButton = new Button("Далее", (Next) -> {
+        Button nextButton = new Button("Далее", click -> {
             if (fieldInn.isEmpty()){
                 notification("ВНИМАНИЕ! Необходимо заполнить ИНН!");
             } else {
@@ -126,7 +125,7 @@ public class ClientCreateView extends VerticalLayout {
         fieldAddress.setWidth("300px");
         fieldAddress.setMaxLength(100);
 
-        Button saveButton = new Button("Сохранить", (Save) -> {
+        Button saveButton = new Button("Сохранить", click -> {
             if (fieldAddress.isEmpty()) {
                 notification("ВНИМАНИЕ! Необходимо заполнить место жительства!");
             } else {
