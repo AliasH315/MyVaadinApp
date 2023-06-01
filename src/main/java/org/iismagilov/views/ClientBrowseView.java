@@ -22,7 +22,7 @@ public class ClientBrowseView extends VerticalLayout {
         initBrowseClient();
     }
     private VerticalLayout formLayout;
-    private VerticalLayout infoLayout;
+    private VerticalLayout gridLayout;
     private Integer idClient;
 
     private void initBrowseClient() {
@@ -48,7 +48,7 @@ public class ClientBrowseView extends VerticalLayout {
         });
         System.out.println("Method browseClient(): clientInfo idClient = " + idClient);
         Button browseButton = new Button("Просмотр", click ->
-                infoLayout(idClient)
+                addGridToLayout(idClient)
         );
         Button returnButton = exit();
         browseLayout.add(
@@ -62,17 +62,16 @@ public class ClientBrowseView extends VerticalLayout {
         return browseLayout;
     }
 
-    private Component infoLayout(Integer idClient) {
-        if(infoLayout != null){
-            infoLayout.removeFromParent();
+    private void addGridToLayout(Integer idClient) {
+        if(gridLayout != null){
+            gridLayout.removeFromParent();
         }
-        infoLayout = new VerticalLayout();
-        infoLayout.add(
+        gridLayout = new VerticalLayout();
+        gridLayout.add(
                 clientInfo(idClient),
                 accountInfo(idClient)
         );
-        add(infoLayout);
-        return infoLayout;
+        add(gridLayout);
     }
     private Grid clientInfo(Integer idClient) {
         System.out.println("Method clientInfo() START for ID = " + idClient);
