@@ -13,7 +13,7 @@ public class ConnectionDAO {
             Connection dbConnection = null;
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            System.err.println("Error: Where is your PostgreSQL JDBC Driver?");
+            System.err.println("Error: Check the correctness of the PostgreSQL JDBC Driver!");
             e.printStackTrace();
         }
         try {
